@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:chart_app/constants.dart';
 
 class ChatScreen extends StatefulWidget {
-   static const String id='ChartScreen';
+  static const String id = 'ChartScreen';
   const ChatScreen({super.key});
 
   @override
@@ -17,7 +17,7 @@ class _ChatScreenState extends State<ChatScreen> {
         leading: null,
         actions: <Widget>[
           IconButton(
-              icon:const Icon(Icons.close),
+              icon: const Icon(Icons.close),
               onPressed: () {
                 //Implement logout functionality
               }),
