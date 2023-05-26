@@ -22,7 +22,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 //Implement logout functionality
               }),
         ],
-        title: Text('⚡️Chat'),
+        title: const Text('Faiz Chat'),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: SafeArea(

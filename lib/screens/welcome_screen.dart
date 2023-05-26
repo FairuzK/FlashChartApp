@@ -1,9 +1,11 @@
+import 'package:chart_app/screens/registration_screen.dart';
+import 'package:chart_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  static const String id='welcome_screen';
+  static const String id = 'welcome_screen';
 
-  const WelcomeScreen({super.key}); 
+  const WelcomeScreen({super.key});
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -14,21 +16,26 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Row(
               children: <Widget>[
-                SizedBox(
-                  height: 60.0,
-                  child: Image.asset('images/logo.png'),
+                Hero(
+                  tag: 'logo',
+                  child: SizedBox(
+                    height: 60.0,
+                    child: Image.asset('images/logo.png'),
+                  ),
                 ),
                 const Text(
-                  'Flash Chat',
+                  'Faiz Chat',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 45.0,
+                    color: Colors.black,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
@@ -46,10 +53,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: MaterialButton(
                   onPressed: () {
                     //Go to login screen.
+                    Navigator.pushNamed(context, LoginScreen.id);
                   },
                   minWidth: 200.0,
                   height: 42.0,
-                  child:const Text(
+                  child: const Text(
                     'Log In',
                   ),
                 ),
@@ -64,10 +72,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: MaterialButton(
                   onPressed: () {
                     //Go to registration screen.
+                    Navigator.pushNamed(context, RegistrationScreen.id);
                   },
                   minWidth: 200.0,
                   height: 42.0,
-                  child:const Text(
+                  child: const Text(
                     'Register',
                   ),
                 ),
