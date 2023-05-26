@@ -1,6 +1,7 @@
 import 'package:chart_app/screens/registration_screen.dart';
 import 'package:chart_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
@@ -10,11 +11,42 @@ class WelcomeScreen extends StatefulWidget {
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+//We provide a SinTicker provider when using one Animation...
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
+  //Initializing of the Animation Controller First..
+  AnimationController? controller;
+  Animation? animation;
+
+  @override
+  //InitState is run whenever the WelcomeScreen is created...
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    );
+    animation =
+        ColorTween(begin: Colors.red, end: Colors.blue).animate(controller!);
+    controller?.forward();
+    controller?.addListener(() {
+      setState(() {});
+      print(animation?.value);
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    controller?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: animation?.value,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -30,14 +62,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: Image.asset('images/logo.png'),
                   ),
                 ),
-                const Text(
-                  'Faiz Chat',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w900,
-                  ),
+                AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText('Faiz Chart',
+                        textStyle: const TextStyle(
+                          fontSize: 45.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w900,
+                        ))
+                  ],
                 ),
               ],
             ),
