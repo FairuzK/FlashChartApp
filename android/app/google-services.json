@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "617207449546",
+    "project_id": "flashchat-8ff63",
+    "storage_bucket": "flashchat-8ff63.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617207449546:android:c145ac21660de968b1b133",
+        "android_client_info": {
+          "package_name": "fairuzk.chart_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDc7W9HAK8vABNDLQheQnrB6Y0s_bn6f6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

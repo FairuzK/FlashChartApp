@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-class welcomeScreenButton extends StatelessWidget {
-  const welcomeScreenButton({
+class roundButton extends StatelessWidget {
+  const roundButton({
     super.key,
     required this.mycolor,
     required this.nextPage,
@@ -45,6 +45,7 @@ class welcomeScreenButton extends StatelessWidget {
           height: 42.0,
           child: Text(
             label,
+            style:const TextStyle(color: Colors.white),
           ),
         ),
       ),
