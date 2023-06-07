@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:chart_app/components/round_button.dart';
 import 'package:chart_app/constants.dart';
-
+import 'package:chart_app/screens/chat_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'LoginScreen';
@@ -11,19 +12,22 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _auth = FirebaseAuth.instance;
+  String? password;
+  String? email;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Hero(
               tag: 'logo',
-              child: Container(
+              child: SizedBox(
                 height: 200.0,
                 child: Image.asset('images/logo.png'),
               ),
@@ -33,9 +37,9 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             TextField(
               onChanged: (value) {
-                //Do something with the user input.
+                email = value;
               },
-              decoration:kTextFeildDecoration.copyWith(
+              decoration: kTextFeildDecoration.copyWith(
                 hintText: 'Enter your Email',
               ),
             ),
@@ -44,16 +48,29 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             TextField(
               onChanged: (value) {
-                //Do something with the user input.
+                password = value;
               },
-              decoration:kTextFeildDecoration.copyWith(
+              decoration: kTextFeildDecoration.copyWith(
                 hintText: 'Enter your Password',
               ),
             ),
             const SizedBox(
               height: 24.0,
             ),
-            roundButton(mycolor: Colors.lightBlueAccent, nextPage: (){}, label: 'Login')
+            roundButton(
+                mycolor: Colors.lightBlueAccent,
+                nextPage: () async {
+                  try {
+                    final user = await _auth.signInWithEmailAndPassword(
+                        email: email!, password: password!);
+                    if (user != null) {
+                      Navigator.pushNamed(context, ChatScreen.id);
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
+                },
+                label: 'Login')
           ],
         ),
       ),

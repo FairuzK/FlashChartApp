@@ -13,8 +13,9 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-   String? password;
-   String? email;
+  bool ShowSpinner = false;
+  String? password;
+  String? email;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +28,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           children: <Widget>[
             Hero(
               tag: 'logo',
-              child: Container(
+              child: SizedBox(
                 height: 200.0,
                 child: Image.asset('images/logo.png'),
               ),
@@ -63,14 +64,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             roundButton(
                 mycolor: Colors.lightBlueAccent,
                 nextPage: () async {
-                  // print(email);
-                  // print(password);
+                  setState(() {
+                    ShowSpinner = true;
+                  });
                   try {
-                    final newUser = await _auth.createUserWithEmailAndPassword(
-                        email: email!, password: password!);
+                    final newUser =
+                        await _auth.createUserWithEmailAndPassword(
+                            email: email!, password: password!);
                     if (newUser != null) {
                       Navigator.pushNamed(context, ChatScreen.id);
                     }
+                    setState(() {
+                      ShowSpinner = false;
+                    });
                   } catch (e) {
                     print(e);
                   }
